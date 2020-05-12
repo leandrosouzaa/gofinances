@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Dashboard, NewTransaction} from '../pages';
 
-const Route = createStackNavigator();
+const Route = createBottomTabNavigator();
 
 const Routes: React.FC = () => {
    return (
-      <Route.Navigator screenOptions={{headerShown: false}}>
+      <Route.Navigator tabBarOptions={{style: {flexDirection: 'row'}}}>
          <Route.Screen name="Dashboard" component={Dashboard} />
          <Route.Screen name="NewTransaction" component={NewTransaction} />
       </Route.Navigator>
