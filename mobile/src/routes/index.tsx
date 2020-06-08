@@ -13,7 +13,10 @@ const Routes: React.FC = () => {
       <Route.Navigator
          tabBarOptions={{
             activeTintColor: '#FF872C',
-            style: {borderWidth: 0, height: 56},
+            style: {
+               height: 56,
+               borderTopWidth: 0,
+            },
          }}>
          <Route.Screen
             name="Dashboard"
