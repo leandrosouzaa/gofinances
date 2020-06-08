@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {Text} from 'react-native';
+import {Header} from '../../components';
 
 import {Container} from './styles';
 
 const Dashboard: React.FC = () => {
    return (
       <Container>
-         <Text>Dashboard</Text>
+         <Header />
       </Container>
    );
 };
