@@ -3,16 +3,29 @@ import {Container, Title, Value, Details, DetailText} from './styles';
 
 interface ItemProps {
    type: 'outcome' | 'income';
+   value: number;
+   category: string;
+   date: string;
+   title: string;
 }
 
-const Item: React.FC<ItemProps> = ({type, ...rest}) => {
+const Item: React.FC<ItemProps> = ({
+   type,
+   value,
+   category,
+   date,
+   title,
+   ...rest
+}) => {
    return (
       <Container {...rest}>
-         <Title>Desenvolvimento de Site</Title>
-         <Value type={type}>{type === 'outcome' && '- '}R$ 12.000,00</Value>
+         <Title>{title}</Title>
+         <Value type={type}>
+            {type === 'outcome' && '- '}R$ {value}
+         </Value>
          <Details>
-            <DetailText>Vendas</DetailText>
-            <DetailText>12/04/2020</DetailText>
+            <DetailText>{category}</DetailText>
+            <DetailText>{date}</DetailText>
          </Details>
       </Container>
    );
