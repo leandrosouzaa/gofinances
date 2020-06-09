@@ -13,3 +13,15 @@ export const Background = styled.View`
 export const CardView = styled.View`
    margin-top: -150px;
 `;
+
+export const ListView = styled.SafeAreaView`
+   padding: 30px 16px 16px;
+   margin-bottom: 100px;
+`;
+
+export const ListTitle = styled.Text`
+   font-size: 20px;
+   line-height: 30px;
+   font-family: 'Poppins-Regular';
+   margin-bottom: 24px;
+`;

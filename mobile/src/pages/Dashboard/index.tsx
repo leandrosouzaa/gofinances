@@ -1,11 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
-import {Header, Card} from '../../components';
+import {Header, Card, Item} from '../../components';
 
 import {ScrollView} from 'react-native';
 
-import {Container, Background, CardView} from './styles';
+import {Container, Background, CardView, ListTitle, ListView} from './styles';
 
 const Dashboard: React.FC = () => {
    return (
@@ -42,6 +42,12 @@ const Dashboard: React.FC = () => {
                   />
                </ScrollView>
             </CardView>
+            <ListView>
+               <ListTitle>Listagem</ListTitle>
+               <ScrollView showsVerticalScrollIndicator={false}>
+                  <Item type="outcome" />
+               </ScrollView>
+            </ListView>
          </Container>
       </>
    );
