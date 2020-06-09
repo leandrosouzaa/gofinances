@@ -4,8 +4,9 @@ export const Container = styled.View`
    background-color: #5636d3;
    height: 81px;
    flex-direction: row;
-   justify-content: space-around;
+   justify-content: space-between;
    align-items: center;
+   padding: 0 24px;
 `;
 
 export const Logo = styled.Image`

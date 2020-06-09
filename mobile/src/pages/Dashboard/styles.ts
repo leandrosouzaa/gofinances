@@ -15,7 +15,7 @@ export const CardView = styled.View`
 `;
 
 export const ListView = styled.SafeAreaView`
-   padding: 30px 16px 16px;
+   padding: 40px 24px 24px 24px;
    margin-bottom: 100px;
 `;
 
