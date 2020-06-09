@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import {Container, Type, Value, Info, Last} from './styles';
 
 interface CardProps {
-   value: string;
+   value: number;
    icon: string;
    backgroundColor?: string;
    iconColor?: string;

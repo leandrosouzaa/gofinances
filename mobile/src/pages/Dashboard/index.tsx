@@ -24,20 +24,20 @@ const Dashboard: React.FC = () => {
                      title="Entradas"
                      icon="arrow-up-circle"
                      iconColor="#12A454"
-                     value={'12.000,00'}
+                     value={12.0}
                   />
 
                   <Card
                      title="Saídas"
                      icon="arrow-down-circle"
                      iconColor="#E83F5B"
-                     value={'12.000,00'}
+                     value={12.0}
                   />
 
                   <Card
                      title="Total"
                      icon="dollar-sign"
-                     value={'12.000,00'}
+                     value={120000.0}
                      backgroundColor="#FF872C"
                   />
                </ScrollView>
@@ -45,7 +45,13 @@ const Dashboard: React.FC = () => {
             <ListView>
                <ListTitle>Listagem</ListTitle>
                <ScrollView showsVerticalScrollIndicator={false}>
-                  <Item type="outcome" />
+                  <Item
+                     title="Desafio"
+                     type="outcome"
+                     value={12000000}
+                     date="12/18/2020"
+                     category="Alimentação"
+                  />
                </ScrollView>
             </ListView>
          </Container>
