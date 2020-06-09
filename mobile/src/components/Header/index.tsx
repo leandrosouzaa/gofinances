@@ -4,7 +4,7 @@ import {format} from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 import {Container, Logo, TextDate} from './styles';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logos/logo.png';
 
 const Header: React.FC = () => {
    const today = useMemo(() => {

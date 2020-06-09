@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
-import {Header, Card, Item} from '../../components';
-
 import {ScrollView} from 'react-native';
+
+import {Header, Card, Item} from '../../components';
 
 import {Container, Background, CardView, ListTitle, ListView} from './styles';
 

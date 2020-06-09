@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {Container, Title, Value, Details, DetailText} from './styles';
 
 interface ItemProps {
