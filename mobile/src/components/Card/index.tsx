@@ -10,6 +10,7 @@ interface CardProps {
    backgroundColor?: string;
    iconColor?: string;
    title: string;
+   last: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -18,6 +19,7 @@ const Card: React.FC<CardProps> = ({
    iconColor = '#fff',
    backgroundColor = '#fff',
    title,
+   last,
    ...rest
 }) => {
    return (
@@ -25,9 +27,7 @@ const Card: React.FC<CardProps> = ({
          <Info>
             <Type colorTheme={backgroundColor}>{title}</Type>
             <Value colorTheme={backgroundColor}>R$ {value}</Value>
-            <Last colorTheme={backgroundColor}>
-               Última entrada dia 13 de abril
-            </Last>
+            <Last colorTheme={backgroundColor}>{last}</Last>
          </Info>
          <Icon name={icon} size={35} color={iconColor} />
       </Container>
