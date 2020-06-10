@@ -1,15 +1,21 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useCallback, useState} from 'react';
 
-import Icon from 'react-native-vector-icons/Feather';
+import * as Yup from 'yup';
 import {
    TextInput,
    KeyboardAvoidingView,
    ScrollView,
    Platform,
+   Alert,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
+import {useNavigation} from '@react-navigation/native';
 
+import api from '../../services/api';
+import getValidationErros from '../../utils/getValidationErros';
 import {Header, Input, Button} from '../../components';
 
 import {
@@ -21,22 +27,68 @@ import {
    SelectItemButton,
 } from './styles';
 
+interface TransactionFormData {
+   title: string;
+   value: number;
+   category: string;
+}
+
 const NewTransaction: React.FC = () => {
    const formRef = useRef<FormHandles>(null);
    const valueInputRef = useRef<TextInput>(null);
    const categoryInputRef = useRef<TextInput>(null);
+
    const [isSelected, setIsSelected] = useState<boolean>(true);
    const [type, setType] = useState<'outcome' | 'income'>('income');
 
-   const handleAddTransaction = useCallback(() => {}, []);
+   const navigation = useNavigation();
 
-   const handleSelectType = (bool: boolean, value: 'outcome' | 'income') => {
+   const handleSelectType = (bool: boolean) => {
       if (bool === isSelected) {
          return;
       }
-      setType(value);
       setIsSelected(!isSelected);
    };
+
+   const handleAddTransaction = useCallback(
+      async (data: TransactionFormData): Promise<void> => {
+         try {
+            formRef.current?.setErrors({});
+
+            const form = {...data, type};
+
+            console.log(form);
+
+            const schema = Yup.object().shape({
+               title: Yup.string().required('Informe um título'),
+               value: Yup.number().required('Informe um valor'),
+               category: Yup.string().required('Informe uma categoria'),
+            });
+
+            await schema.validate(data, {
+               abortEarly: false,
+            });
+
+            await api.post('transactions', {...data, type});
+            Alert.alert('Feito!', 'Você cadastrou uma nova transação');
+            navigation.navigate('Dashboard');
+         } catch (err) {
+            if (err instanceof Yup.ValidationError) {
+               const errors = getValidationErros(err);
+
+               formRef.current?.setErrors(errors);
+               return;
+            }
+
+            Alert.alert(
+               'Oppsss',
+               'Alguma coisa deu errado, tente novamente mais tarde.',
+            );
+            navigation.navigate('Dashboard');
+         }
+      },
+      [navigation, type],
+   );
 
    return (
       <KeyboardAvoidingView
@@ -48,11 +100,7 @@ const NewTransaction: React.FC = () => {
             contentContainerStyle={{flex: 1}}>
             <Header />
             <Container>
-               <Form
-                  ref={formRef}
-                  onSubmit={() => {
-                     handleAddTransaction;
-                  }}>
+               <Form ref={formRef} onSubmit={handleAddTransaction}>
                   <Title>Cadastro</Title>
 
                   <Input
@@ -85,7 +133,10 @@ const NewTransaction: React.FC = () => {
                   <SelectView>
                      <SelectItem value={type} isSelected={isSelected}>
                         <SelectItemButton
-                           onPress={() => handleSelectType(true, 'income')}>
+                           onPress={() => {
+                              handleSelectType(true);
+                              setType('income');
+                           }}>
                            <Icon
                               name="arrow-up-circle"
                               size={20}
@@ -97,7 +148,10 @@ const NewTransaction: React.FC = () => {
 
                      <SelectItem value={type} isSelected={!isSelected}>
                         <SelectItemButton
-                           onPress={() => handleSelectType(false, 'outcome')}>
+                           onPress={() => {
+                              handleSelectType(false);
+                              setType('outcome');
+                           }}>
                            <Icon
                               name="arrow-down-circle"
                               size={20}
@@ -122,7 +176,12 @@ const NewTransaction: React.FC = () => {
                      }}
                   />
 
-                  <Button text="Cadastrar" />
+                  <Button
+                     title="Cadastrar"
+                     onPress={() => {
+                        formRef.current?.submitForm();
+                     }}
+                  />
                </Form>
             </Container>
          </ScrollView>
