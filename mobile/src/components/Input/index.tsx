@@ -96,7 +96,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
                <Icon
                   style={{marginRight: 0}}
                   name="alert-circle"
-                  color="#c53030"
+                  color="#E83F5B"
                   size={18}
                />
             </Error>

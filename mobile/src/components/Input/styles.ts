@@ -19,7 +19,7 @@ export const Container = styled.View<ContainerProps>`
    ${(props) =>
       props.isErrored &&
       css`
-         border: 2px solid #c53030;
+         border: 2px solid #e83f5b;
       `}
    ${(props) =>
       props.isFocused &&
