@@ -4,7 +4,7 @@ import {TextInput} from 'react-native';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 
-import {Header, Input} from '../../components';
+import {Header, Input, Button} from '../../components';
 
 import {Container, Title} from './styles';
 
@@ -66,6 +66,8 @@ const NewTransaction: React.FC = () => {
                      formRef.current?.submitForm();
                   }}
                />
+
+               <Button text="Cadastrar" />
             </Form>
          </Container>
       </>
