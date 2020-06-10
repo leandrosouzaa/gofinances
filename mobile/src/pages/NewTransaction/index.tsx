@@ -40,6 +40,7 @@ const NewTransaction: React.FC = () => {
 
    const [isSelected, setIsSelected] = useState<boolean>(true);
    const [type, setType] = useState<'outcome' | 'income'>('income');
+   const [loading, setLoading] = useState(false);
 
    const navigation = useNavigation();
 
@@ -53,6 +54,7 @@ const NewTransaction: React.FC = () => {
    const handleAddTransaction = useCallback(
       async (data: TransactionFormData): Promise<void> => {
          try {
+            setLoading(true);
             formRef.current?.setErrors({});
 
             const form = {...data, type};
@@ -85,6 +87,8 @@ const NewTransaction: React.FC = () => {
                'Alguma coisa deu errado, tente novamente mais tarde.',
             );
             navigation.navigate('Dashboard');
+         } finally {
+            setLoading(false);
          }
       },
       [navigation, type],
@@ -181,6 +185,7 @@ const NewTransaction: React.FC = () => {
                      onPress={() => {
                         formRef.current?.submitForm();
                      }}
+                     enabled={!loading}
                   />
                </Form>
             </Container>
