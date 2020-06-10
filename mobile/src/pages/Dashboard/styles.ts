@@ -14,7 +14,7 @@ export const CardView = styled.View`
    margin-top: -150px;
 `;
 
-export const ListView = styled.SafeAreaView`
+export const ListView = styled.View`
    padding: 40px 24px 24px 24px;
    margin-bottom: 100px;
 `;
