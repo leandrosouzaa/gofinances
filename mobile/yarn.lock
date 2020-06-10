@@ -1224,6 +1224,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@types/yup@^0.29.2":
+  version "0.29.2"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.29.2.tgz#88475225c515a523c6def5d102cc89aa3508cdf4"
+  integrity sha512-+xWGnndRDsBxa5Ep5Of/XoiKdcUWVurh48N4zOqk1Zpqn09gjncY+VDctoBdSQ4ubmIDWA32FB7HN0y5vNhL4A==
+
 "@typescript-eslint/eslint-plugin@^2.25.0", "@typescript-eslint/eslint-plugin@^2.32.0":
   version "2.32.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.32.0.tgz#5d5cc2e00b1d4a4b848cc68bfdd3aede1ef0ad16"
