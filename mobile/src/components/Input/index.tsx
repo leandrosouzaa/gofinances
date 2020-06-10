@@ -74,7 +74,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
          {icon && (
             <Icon
                name={icon}
-               size={20}
+               size={18}
                color={isFocused || isFilled ? '#5636D3' : '#969CB3'}
             />
          )}
@@ -97,7 +97,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
                   style={{marginRight: 0}}
                   name="alert-circle"
                   color="#c53030"
-                  size={20}
+                  size={18}
                />
             </Error>
          )}
