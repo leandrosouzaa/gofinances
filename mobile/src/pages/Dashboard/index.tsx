@@ -2,12 +2,13 @@
 import React, {useEffect, useState, useMemo, useCallback} from 'react';
 import {} from '@react-navigation/native';
 
-import {ScrollView} from 'react-native';
+import {ScrollView, Alert} from 'react-native';
 import {format, parseISO} from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 import api from '../../services/api';
 import {Header, Card, Item} from '../../components';
+import {CardLoader} from '../../components/Loaders';
 
 import {Container, Background, CardView, ListTitle, ListView} from './styles';
 
@@ -36,9 +37,13 @@ interface Props {
 const Dashboard: React.FC<Props> = ({navigation}) => {
    const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
    const [balance, setBalance] = useState<BalanceProps>({} as BalanceProps);
+   const [isLoading, setIsLoading] = useState(false);
 
-   const loadTransactions = useCallback(() => {
-      api.get('transactions').then((res) => {
+   const loadTransactions = useCallback(async () => {
+      try {
+         setIsLoading(true);
+         const res = await api.get('transactions');
+
          const formattedTransactions = res.data.transactions.map(
             (t: TransactionsProps) => {
                return {
@@ -53,15 +58,24 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
                };
             },
          );
+
          setTransactions(formattedTransactions.reverse());
          setBalance(res.data.balance);
-      });
+         setIsLoading(false);
+      } catch (err) {
+         Alert.alert(
+            'Erro :(',
+            'Não foi possível carregar suas transações, verifique sua conexão e tente novamente',
+         );
+      } finally {
+         // setIsLoading(false);
+      }
    }, []);
 
    useEffect(() => {
       const unsubscribe = navigation.addListener('focus', () => {
-         loadTransactions();
          console.log('chamou');
+         loadTransactions();
       });
 
       return unsubscribe;
@@ -128,29 +142,41 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
                      paddingHorizontal: 16,
                   }}
                   showsHorizontalScrollIndicator={false}>
-                  <Card
-                     title="Saldo disponível"
-                     icon="dollar-sign"
-                     value={balance.total}
-                     backgroundColor="#FF872C"
-                     last={lastTransaction}
-                  />
+                  {isLoading && (
+                     <>
+                        <CardLoader />
+                        <CardLoader />
+                        <CardLoader />
+                     </>
+                  )}
 
-                  <Card
-                     title="Entradas"
-                     icon="arrow-up-circle"
-                     iconColor="#12A454"
-                     value={balance.income}
-                     last={lastIncome}
-                  />
+                  {balance && !isLoading && (
+                     <>
+                        <Card
+                           title="Saldo disponível"
+                           icon="dollar-sign"
+                           value={balance.total}
+                           backgroundColor="#FF872C"
+                           last={lastTransaction}
+                        />
 
-                  <Card
-                     title="Saídas"
-                     icon="arrow-down-circle"
-                     iconColor="#E83F5B"
-                     value={balance.outcome}
-                     last={lastOutcome}
-                  />
+                        <Card
+                           title="Entradas"
+                           icon="arrow-up-circle"
+                           iconColor="#12A454"
+                           value={balance.income}
+                           last={lastIncome}
+                        />
+
+                        <Card
+                           title="Saídas"
+                           icon="arrow-down-circle"
+                           iconColor="#E83F5B"
+                           value={balance.outcome}
+                           last={lastOutcome}
+                        />
+                     </>
+                  )}
                </ScrollView>
             </CardView>
             <ListView>
