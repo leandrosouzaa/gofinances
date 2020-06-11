@@ -5593,6 +5593,11 @@ react-native-screens@^2.7.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.7.0.tgz#2d3cf3c39a665e9ca1c774264fccdb90e7944047"
   integrity sha512-n/23IBOkrTKCfuUd6tFeRkn3lB2QZ3cmvoubRscR0JU/Zl4/ZyKmwnFmUv1/Fr+2GH/H8UTX59kEKDYYg3dMgA==
 
+react-native-skeleton-loader-pulse@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-skeleton-loader-pulse/-/react-native-skeleton-loader-pulse-1.0.7.tgz#40bbaff220fd2e115e9faeedfcec0ca7b8868616"
+  integrity sha512-Ge598nbe7eshszhNvpweuIM9IMkwsh2nIPwvqIV4sr08YECAcLPaF92eFZxt76fMSzSIpZXSksIsy7Ca9CVdHA==
+
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"
