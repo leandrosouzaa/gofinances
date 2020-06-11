@@ -8,7 +8,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 import api from '../../services/api';
 import {Header, Card, Item} from '../../components';
-import {CardLoader} from '../../components/Loaders';
+import {CardLoader, ItemLoader} from '../../components/Loaders';
 
 import {Container, Background, CardView, ListTitle, ListView} from './styles';
 
@@ -37,7 +37,7 @@ interface Props {
 const Dashboard: React.FC<Props> = ({navigation}) => {
    const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
    const [balance, setBalance] = useState<BalanceProps>({} as BalanceProps);
-   const [isLoading, setIsLoading] = useState(false);
+   const [isLoading, setIsLoading] = useState(true);
 
    const loadTransactions = useCallback(async () => {
       try {
@@ -63,12 +63,11 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
          setBalance(res.data.balance);
          setIsLoading(false);
       } catch (err) {
+         console.log(err);
          Alert.alert(
             'Erro :(',
             'Não foi possível carregar suas transações, verifique sua conexão e tente novamente',
          );
-      } finally {
-         // setIsLoading(false);
       }
    }, []);
 
@@ -184,16 +183,28 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
                <ScrollView
                   showsVerticalScrollIndicator={false}
                   style={{marginBottom: 150}}>
-                  {transactions.map((t) => (
-                     <Item
-                        key={t.id}
-                        title={t.title}
-                        type={t.type}
-                        value={t.value}
-                        date={t.formattedDate}
-                        category={t.category.title}
-                     />
-                  ))}
+                  {isLoading && (
+                     <>
+                        <ItemLoader />
+                        <ItemLoader />
+                        <ItemLoader />
+                        <ItemLoader />
+                     </>
+                  )}
+                  {transactions && !isLoading && (
+                     <>
+                        {transactions.map((t) => (
+                           <Item
+                              key={t.id}
+                              title={t.title}
+                              type={t.type}
+                              value={t.value}
+                              date={t.formattedDate}
+                              category={t.category.title}
+                           />
+                        ))}
+                     </>
+                  )}
                </ScrollView>
             </ListView>
          </Container>
