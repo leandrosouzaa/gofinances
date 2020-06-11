@@ -9,17 +9,22 @@ const CardLoader: React.FC = () => {
       <Container>
          <Info>
             <Type>
-               <SkeletonItem height={20} width={100} />
+               <SkeletonItem borderRadius={5} height={20} width={100} />
             </Type>
             <Value>
-               <SkeletonItem height={40} marginRight={10} width={50} />
-               <SkeletonItem height={40} width={120} />
+               <SkeletonItem
+                  borderRadius={5}
+                  height={40}
+                  marginRight={10}
+                  width={50}
+               />
+               <SkeletonItem borderRadius={5} height={40} width={120} />
             </Value>
             <Last>
-               <SkeletonItem />
+               <SkeletonItem borderRadius={5} />
             </Last>
          </Info>
-         <SkeletonItem height={35} width={35} />
+         <SkeletonItem borderRadius={5} height={35} width={35} />
       </Container>
    );
 };
